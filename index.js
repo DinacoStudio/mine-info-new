@@ -297,4 +297,30 @@ export default class MineInfo {
             hostInfo: hostInfo,
         }
     }
+    /**
+     * 
+     * @param {string} address Ip адрес сервера
+     * @param {number} port Порт сервера
+     * @description Unit test
+     */
+    async unitTest(address, port) {
+        this.getInfo(address, port ? port : null).then(e => {
+            console.log(e)
+            const {
+                online,
+                version: { name: vname, protocol: vprotocol, software: vsoftware },
+                motd,
+                players: { online: ponline, max: pmax, list: plist },
+                favIcon,
+                hostInfo: { ip: hip, port: hport },
+                modInfo: { mods: mmods }
+
+            } = e;
+            let all = [online, vname, vprotocol, motd, vsoftware, ponline, pmax, plist, favIcon, hip, hport, mmods]
+
+            let counter = 0;
+            all.map(e => e != null ? counter++ : null)
+            console.log(`Current score: ${counter} / 12`)
+        });
+    }
 }
